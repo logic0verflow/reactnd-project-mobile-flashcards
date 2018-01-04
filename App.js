@@ -1,12 +1,13 @@
 import React from 'react'
 import { StyleSheet, View, Platform, StatusBar } from 'react-native'
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
 import { blue, white } from './utils/colors'
 import CreateDeck from './components/CreateDeck'
 import DeckList from './components/DeckList'
+import Deck from './components/Deck'
 
 
 
@@ -54,12 +55,27 @@ const Tabs = TabNavigator({
 )
 
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <FlashCardStatusBar backgroundColor={blue} barStyle='light-content' />
-        <Tabs />
+        <MainNavigator />
       </View>
     );
   }
