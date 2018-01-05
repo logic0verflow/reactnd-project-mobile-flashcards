@@ -1,14 +1,37 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+
 import { lightGrey, white, black, blue } from '../utils/colors'
+import { getDeck } from '../utils/helpers'
 
 export default class Deck extends Component {
+
+  state = {
+    deck: null
+  }
+
+  componentDidMount() {
+    const { title } = this.props.navigation.state.params
+    getDeck(title)
+      .then((deck) => this.setState(() => ({ deck })))
+  }
+
   render () {
+    if (this.state.deck === null) {
+      return (
+        <View style={styles.container}>
+          <Text>Loading...</Text>
+        </View>
+      )
+    }
+
+    const { title, questions } = this.state.deck
+
     return (
       <View style={styles.container}>
         <View style={styles.deckInfo}>
-          <Text style={{fontSize: 36}}>Deck name goes Here!</Text>
-          <Text style={{fontSize: 16}}>0 cards</Text>
+          <Text style={{fontSize: 36}}>{title}</Text>
+          <Text style={{fontSize: 16}}>{questions.length} cards</Text>
         </View>
 
         <View style={styles.deckOptions}>

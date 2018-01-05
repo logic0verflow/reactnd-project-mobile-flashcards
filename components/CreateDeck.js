@@ -5,11 +5,26 @@ import {
   StyleSheet,
   TextInput,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native'
+
+import { saveDeckTitle } from '../utils/helpers'
 import { lightGrey, white, blue } from '../utils/colors'
 
 export default class CreateDeck extends Component {
+
+  state = {
+    title: '',
+  }
+
+  submitTitle = () => {
+    saveDeckTitle(this.state.title)
+    this.setState(() => ({
+      title: ''
+    }))
+    this.props.navigation.navigate('Home')
+  }
+
   render () {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -17,12 +32,14 @@ export default class CreateDeck extends Component {
           <Text style={styles.header}>What is the title of your new deck?</Text>
           <TextInput
             style={styles.input}
-            placeholder='Enter deck title here'/>
+            onChangeText={(title) => this.setState({title})}
+            placeholder='Enter deck title here'
+            value={this.state.title}/>
         </View>
 
         <TouchableOpacity
           style={styles.submitBtn}
-          onPress={() => {console.log('submitters')}}>
+          onPress={this.submitTitle}>
             <Text style={{color: white}}>SUBMIT</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

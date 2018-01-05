@@ -1,23 +1,48 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+
 import { lightGrey, white } from '../utils/colors'
+import { getDecks } from '../utils/helpers'
 
 export default class DeckList extends Component {
+
+  state = {
+    decks: null
+  }
+
+  componentDidMount () {
+    getDecks().then((decks) => {
+      this.setState(() => ({
+        decks
+      }))
+    })
+  }
+
   render () {
+    const { decks } = this.state
+
+    if (decks === null) {
+      return (
+        <View style={styles.container}>
+          <Text>Create a deck and start flashing!</Text>
+        </View>
+      )
+    }
+
+    const deckTitles = Object.keys(decks)
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.deck}
-          onPress={() => this.props.navigation.navigate('Deck')}>
-            <Text style={{fontSize: 20}}>Deck name goes Here!</Text>
-            <Text style={{fontSize: 16}}>0 cards</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.deck}
-          onPress={() => this.props.navigation.navigate('Deck')}>
-            <Text style={{fontSize: 20}}>Kaiba Deck</Text>
-            <Text style={{fontSize: 16}}>0 cards</Text>
-        </TouchableOpacity>
+      {
+        deckTitles.map((title) => (
+          <TouchableOpacity
+            style={styles.deck}
+            key={title}
+            onPress={() => this.props.navigation.navigate('Deck', { title })}>
+              <Text style={{fontSize: 20}}>{decks[title].title}</Text>
+              <Text style={{fontSize: 16}}>{decks[title].questions.length} cards</Text>
+          </TouchableOpacity>
+        ))
+      }
       </View>
     )
   }
