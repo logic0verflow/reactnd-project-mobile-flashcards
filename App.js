@@ -3,11 +3,14 @@ import { StyleSheet, View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import { blue, white } from './utils/colors'
 import CreateDeck from './components/CreateDeck'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
+import AddCard from './components/AddCard'
 
 
 
@@ -67,7 +70,17 @@ const MainNavigator = StackNavigator({
         backgroundColor: blue
       }
     }
-  }
+  },
+  'AddCard': {
+    screen: AddCard,
+    navigationOptions: {
+      title: 'Add Card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  },
 })
 
 export default class App extends React.Component {

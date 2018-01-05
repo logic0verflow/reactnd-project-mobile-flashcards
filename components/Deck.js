@@ -6,6 +6,11 @@ import { getDeck } from '../utils/helpers'
 
 export default class Deck extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params
+    return { title }
+  }
+
   state = {
     deck: null
   }
@@ -15,6 +20,8 @@ export default class Deck extends Component {
     getDeck(title)
       .then((deck) => this.setState(() => ({ deck })))
   }
+
+
 
   render () {
     if (this.state.deck === null) {
@@ -37,7 +44,7 @@ export default class Deck extends Component {
         <View style={styles.deckOptions}>
           <TouchableOpacity
             style={[styles.btn, {backgroundColor: white}]}
-            onPress={() => console.log('adding card')}>
+            onPress={() => this.props.navigation.navigate('AddCard', { title })}>
               <Text style={{color: black}}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
