@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { lightGrey, white, black, green, red } from '../utils/colors'
+import { lightGrey, white, black, green, red, blue } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 export default class Quiz extends Component {
@@ -54,12 +54,12 @@ export default class Quiz extends Component {
           </Text>
           <Text style={{textAlign: 'center'}}>{correct}/{questions.length}</Text>
           <TouchableOpacity
-            style={[styles.btn, {backgroundColor: black}]}
+            style={[styles.btn, {backgroundColor: blue}]}
             onPress={() => this.restart()}>
-              <Text style={{color: white, fontSize: 18}}>Restart</Text>
+              <Text style={{color: white, fontSize: 18}}>Restart Quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.btn, {backgroundColor: black}]}
+            style={[styles.btn, {backgroundColor: blue}]}
             onPress={() => {
               this.restart()
               this.props.navigation.goBack()

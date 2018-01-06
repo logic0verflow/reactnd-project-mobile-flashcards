@@ -33,8 +33,8 @@ class DeckList extends Component {
     let deckTitles = Object.keys(decks)
     if (deckTitles.length === 0) {
       return (
-        <View style={styles.container}>
-          <Text>Create a deck and start flashing!</Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{textAlign: 'center'}}>Create a deck and start flashing!</Text>
         </View>
       )
     }

@@ -21,7 +21,18 @@ class AddCard extends Component {
   }
 
   submit = () => {
-    const question = {
+
+    let { question, answer } = this.state
+    question = question.replace(/\s/g, '')
+    answer = answer.replace(/\s/g, '')
+
+    if (question === '') return alert("Error: Can't use empty question!")
+    if (answer === '') return alert("Error: Can't use empty answer!")
+    if (this.state.answer === 'Tyler McGinnis') alert('Hey! That person is awesome 😆')
+
+
+    // no issues with card details, create and add question
+    question = {
       question: this.state.question,
       answer: this.state.answer
     }
@@ -58,11 +69,13 @@ class AddCard extends Component {
             style={styles.input}
             value={this.state.question}
             onChangeText={(question) => this.setState(() => ({ question }))}
+            maxLength={48}
             placeholder='Enter Question Here'/>
           <TextInput
             style={styles.input}
             value={this.state.answer}
             onChangeText={(answer) => this.setState(() => ({ answer }))}
+            maxLength={48}
             placeholder='Enter Answer Here'/>
         </View>
 

@@ -45,6 +45,7 @@ class CreateDeck extends Component {
             style={styles.input}
             onChangeText={(title) => this.setState({title})}
             placeholder='Enter deck title here'
+            maxLength={32}
             value={this.state.title}/>
         </View>
 

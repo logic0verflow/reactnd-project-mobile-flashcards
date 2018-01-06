@@ -30,8 +30,8 @@ class Deck extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.deckInfo}>
-          <Text style={{fontSize: 36}}>{title}</Text>
-          <Text style={{fontSize: 16}}>{questions.length} cards</Text>
+          <Text style={{fontSize: 36, textAlign: 'center'}}>{title}</Text>
+          <Text style={{fontSize: 16, textAlign: 'center'}}>{questions.length} cards</Text>
         </View>
 
         <View style={styles.deckOptions}>
@@ -41,7 +41,7 @@ class Deck extends Component {
               <Text style={{color: black}}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.btn, {backgroundColor: black}]}
+            style={[styles.btn, {backgroundColor: blue}]}
             onPress={() => {
               if (questions.length === 0) {
                 alert('Deck is empty! Add some cards first 😕')

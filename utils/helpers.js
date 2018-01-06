@@ -1,8 +1,8 @@
 import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 
-const FLASHCARD_STORAGE_KEY = 'MobileFlashCards:decks'
-const NOTIFICATION_KEY = 'MobileFlashCards:notifications'
+const FLASHCARD_STORAGE_KEY = 'UdaciFlash:decks'
+const NOTIFICATION_KEY = 'UdaciFlash:notifications'
 
 export function getDecks () {
   return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
