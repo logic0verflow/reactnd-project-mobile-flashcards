@@ -46,7 +46,7 @@ class Deck extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.btn, {backgroundColor: black}]}
-            onPress={() => console.log('Start quiz')}>
+            onPress={() => this.props.navigation.navigate('Quiz', { title, questions })}>
               <Text style={{color: white}}>Start Quiz</Text>
           </TouchableOpacity>
         </View>

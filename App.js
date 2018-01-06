@@ -11,6 +11,7 @@ import CreateDeck from './components/CreateDeck'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 import reducer from './reducers'
 
 
@@ -81,6 +82,16 @@ const MainNavigator = StackNavigator({
       }
     }
   },
+  'Quiz': {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  }
 })
 
 export default class App extends React.Component {
