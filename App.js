@@ -11,7 +11,7 @@ import CreateDeck from './components/CreateDeck'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
-
+import reducer from './reducers'
 
 
 function FlashCardStatusBar({ backgroundColor, ...props }) {
@@ -86,11 +86,13 @@ const MainNavigator = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <FlashCardStatusBar backgroundColor={blue} barStyle='light-content' />
-        <MainNavigator />
-      </View>
-    );
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <FlashCardStatusBar backgroundColor={blue} barStyle='light-content' />
+          <MainNavigator />
+        </View>
+      </Provider>
+    )
   }
 }
 

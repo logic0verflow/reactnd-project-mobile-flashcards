@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+
 import {
   View,
   Text,
@@ -10,8 +13,9 @@ import {
 
 import { lightGrey, white, black, blue } from '../utils/colors'
 import { addCardToDeck } from '../utils/helpers'
+import { addCard } from '../actions'
 
-export default class AddCard extends Component {
+class AddCard extends Component {
 
   state = {
     question: '',
@@ -31,6 +35,8 @@ export default class AddCard extends Component {
       question: '',
       answer: ''
     }))
+
+    this.props.dispatch(addCard(title, question))
 
     this.props.navigation.goBack()
   }
@@ -115,3 +121,6 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
 })
+
+
+export default connect()(AddCard)

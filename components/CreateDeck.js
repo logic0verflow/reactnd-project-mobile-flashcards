@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   View,
   Text,
@@ -8,10 +9,11 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { saveDeckTitle } from '../utils/helpers'
+import { saveDeckTitle, getDecks } from '../utils/helpers'
 import { lightGrey, white, blue } from '../utils/colors'
+import { refreshDecks } from '../actions'
 
-export default class CreateDeck extends Component {
+class CreateDeck extends Component {
 
   state = {
     title: '',
@@ -19,9 +21,16 @@ export default class CreateDeck extends Component {
 
   submitTitle = () => {
     saveDeckTitle(this.state.title)
+      .then(() => {
+        getDecks().then((decks) => {
+          this.props.dispatch(refreshDecks(decks))
+        })
+      })
+
     this.setState(() => ({
       title: ''
     }))
+
     this.props.navigation.navigate('Home')
   }
 
@@ -83,3 +92,6 @@ const styles = StyleSheet.create({
     borderRadius: 4
   }
 })
+
+
+export default connect()(CreateDeck)

@@ -1,30 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { lightGrey, white, black, blue } from '../utils/colors'
 import { getDeck } from '../utils/helpers'
 
-export default class Deck extends Component {
+class Deck extends Component {
 
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params
     return { title }
   }
 
-  state = {
-    deck: null
-  }
-
-  componentDidMount() {
-    const { title } = this.props.navigation.state.params
-    getDeck(title)
-      .then((deck) => this.setState(() => ({ deck })))
-  }
+  // componentDidMount() {
+  //   const { title } = this.props.navigation.state.params
+  //   getDeck(title)
+  //     .then((deck) => this.setState(() => ({ deck })))
+  // }
 
 
 
   render () {
-    if (this.state.deck === null) {
+    if (this.props.deck === null) {
       return (
         <View style={styles.container}>
           <Text>Loading...</Text>
@@ -32,7 +29,7 @@ export default class Deck extends Component {
       )
     }
 
-    const { title, questions } = this.state.deck
+    const { title, questions } = this.props.deck
 
     return (
       <View style={styles.container}>
@@ -87,3 +84,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   }
 })
+
+function mapStateToProps (state, { navigation }) {
+  const { title } = navigation.state.params
+  return {
+    deck: state[title]
+  }
+}
+
+export default connect(mapStateToProps)(Deck)
