@@ -12,13 +12,9 @@ class Deck extends Component {
     return { title }
   }
 
-  // componentDidMount() {
-  //   const { title } = this.props.navigation.state.params
-  //   getDeck(title)
-  //     .then((deck) => this.setState(() => ({ deck })))
-  // }
+  emptyDeckWarning() {
 
-
+  }
 
   render () {
     if (this.props.deck === null) {
@@ -46,7 +42,13 @@ class Deck extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.btn, {backgroundColor: black}]}
-            onPress={() => this.props.navigation.navigate('Quiz', { title, questions })}>
+            onPress={() => {
+              if (questions.length === 0) {
+                alert('Deck is empty! Add some cards first 😕')
+              } else {
+                this.props.navigation.navigate('Quiz', { title, questions })}
+              }
+            }>
               <Text style={{color: white}}>Start Quiz</Text>
           </TouchableOpacity>
         </View>

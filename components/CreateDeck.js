@@ -7,6 +7,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
+  Keyboard
 } from 'react-native'
 
 import { saveDeckTitle, getDecks } from '../utils/helpers'
@@ -20,18 +21,19 @@ class CreateDeck extends Component {
   }
 
   submitTitle = () => {
-    saveDeckTitle(this.state.title)
+    Keyboard.dismiss()
+    const { title } = this.state
+    saveDeckTitle(title)
       .then(() => {
         getDecks().then((decks) => {
           this.props.dispatch(refreshDecks(decks))
+          this.props.navigation.navigate('Deck', { title })
         })
       })
 
     this.setState(() => ({
       title: ''
     }))
-
-    this.props.navigation.navigate('Home')
   }
 
   render () {
@@ -49,7 +51,7 @@ class CreateDeck extends Component {
         <TouchableOpacity
           style={styles.submitBtn}
           onPress={this.submitTitle}>
-            <Text style={{color: white}}>SUBMIT</Text>
+            <Text style={{color: white}}>Create Deck</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )

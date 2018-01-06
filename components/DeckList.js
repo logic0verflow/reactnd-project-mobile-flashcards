@@ -5,16 +5,29 @@ import { connect } from 'react-redux'
 import { lightGrey, white } from '../utils/colors'
 import { getDecks } from '../utils/helpers'
 import { refreshDecks } from '../actions'
+import { AppLoading } from 'expo'
 
 class DeckList extends Component {
+  state = {
+    ready: false
+  }
 
   componentDidMount () {
     getDecks().then((decks) => {
       this.props.dispatch(refreshDecks(decks))
+      this.setState(() => ({
+        ready: true
+      }))
     })
   }
 
   render () {
+
+    if (!this.state.ready) {
+      return (
+        <AppLoading/>
+      )
+    }
 
     const { decks } = this.props
     let deckTitles = Object.keys(decks)
