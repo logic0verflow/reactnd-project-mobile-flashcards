@@ -4,17 +4,20 @@ import { Notifications, Permissions } from 'expo'
 const FLASHCARD_STORAGE_KEY = 'UdaciFlash:decks'
 const NOTIFICATION_KEY = 'UdaciFlash:notifications'
 
+// Returns all the decks created and saved to local storage
 export function getDecks () {
   return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
     .then(JSON.parse)
 }
 
+// Returns a single deck with the specified id from local storage
 export function getDeck (id) {
   return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
     .then(JSON.parse)
     .then((data) => (data[id]))
 }
 
+// Creates a new deck entry in local storage with the specified title
 export function saveDeckTitle (title) {
   return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
     [title]: {
@@ -24,12 +27,13 @@ export function saveDeckTitle (title) {
   }))
 }
 
+// Adds a question and answer pair to the specified deck in local storage
 export function addCardToDeck (title, question) {
   AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
     .then(JSON.parse)
-    .then((data) => (data[title]))
+    .then((data) => (data[title])) // Get the deck from local storage
     .then(({ questions }) => {
-      questions.push(question)
+      questions.push(question) // Add the new question answer pair to the list
       return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
         [title]: {
           title: title,

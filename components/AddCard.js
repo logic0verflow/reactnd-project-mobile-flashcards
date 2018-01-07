@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native'
 
-import { lightGrey, white, black, blue } from '../utils/colors'
+import { lightGrey, white, blue } from '../utils/colors'
 import { addCardToDeck } from '../utils/helpers'
 import { addCard } from '../actions'
 
@@ -23,6 +23,7 @@ class AddCard extends Component {
   submit = () => {
 
     let { question, answer } = this.state
+    // remove all white space characters to test if any other characters exist
     question = question.replace(/\s/g, '')
     answer = answer.replace(/\s/g, '')
 
@@ -40,11 +41,13 @@ class AddCard extends Component {
     const { title } = this.props.navigation.state.params
     addCardToDeck(title, question)
 
+    // reset fields for any future new cards
     this.setState(() => ({
       question: '',
       answer: ''
     }))
 
+    // Update the redux store with the new card
     this.props.dispatch(addCard(title, question))
 
     this.props.navigation.goBack()

@@ -1,27 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { AppLoading } from 'expo'
 
-import { lightGrey, white, black, blue } from '../utils/colors'
+import { white, black, blue } from '../utils/colors'
 import { getDeck } from '../utils/helpers'
 
 class Deck extends Component {
 
+  // Sets the view header text
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params
     return { title }
   }
 
-  emptyDeckWarning() {
-
-  }
-
   render () {
     if (this.props.deck === null) {
       return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
-        </View>
+        <AppLoading />
       )
     }
 

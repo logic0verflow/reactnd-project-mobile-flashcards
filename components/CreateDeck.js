@@ -21,10 +21,13 @@ class CreateDeck extends Component {
   }
 
   submitTitle = () => {
-    Keyboard.dismiss()
+
+    Keyboard.dismiss() // Hides the keyboard
+
     const { title } = this.state
     saveDeckTitle(title)
       .then(() => {
+        // After the new title has been saved, update the redux store
         getDecks().then((decks) => {
           this.props.dispatch(refreshDecks(decks))
           this.props.navigation.navigate('Deck', { title })

@@ -15,7 +15,7 @@ import Quiz from './components/Quiz'
 import reducer from './reducers'
 import { setLocalNotification } from './utils/helpers'
 
-
+// Returns a component to be used under the devices status bar
 function FlashCardStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>

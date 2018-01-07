@@ -15,6 +15,7 @@ class DeckList extends Component {
   componentDidMount () {
     getDecks().then((decks) => {
       this.props.dispatch(refreshDecks(decks))
+      // store has been updated with the decks from storage, ready to display
       this.setState(() => ({
         ready: true
       }))
@@ -31,6 +32,8 @@ class DeckList extends Component {
 
     const { decks } = this.props
     let deckTitles = Object.keys(decks)
+
+    // No decks have been created so tell the user to create some!
     if (deckTitles.length === 0) {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

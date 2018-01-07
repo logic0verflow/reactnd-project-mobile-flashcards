@@ -10,6 +10,10 @@ import {
 import { lightGrey, white, black, green, red, blue } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
+/*
+* A component to cycle through the questions with the passed deck title,
+* displaying the results at the end.
+*/
 export default class Quiz extends Component {
   state = {
     index: 0,
@@ -20,6 +24,7 @@ export default class Quiz extends Component {
   submit = (answer) => {
     let correct = this.state.correct
     correct += answer === 'correct' ? 1 : 0
+    // Prepare state for next question if one exist
     this.setState(() => ({
       index: this.state.index + 1,
       correct,
@@ -43,6 +48,7 @@ export default class Quiz extends Component {
 
     if (index === questions.length) {
 
+      // Clear todays notification since the user completed a quiz
       clearLocalNotification()
         .then(setLocalNotification())
 
